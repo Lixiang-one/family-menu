@@ -2,7 +2,7 @@ import { createServerClient } from '@supabase/ssr'
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
-export async function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   if (request.nextUrl.pathname === '/admin/login') return NextResponse.next()
 
   const response = NextResponse.next({ request: { headers: request.headers } })
@@ -23,9 +23,11 @@ export async function middleware(request: NextRequest) {
     }
   )
 
-  const { data: { session } } = await supabase.auth.getSession()
+  const sessionCookie = request.cookies.getAll().find(
+    c => c.name.startsWith('sb-') && c.name.endsWith('-auth-token')
+  )
 
-  if (!session) {
+  if (!sessionCookie) {
     return NextResponse.redirect(new URL('/admin/login', request.url))
   }
 
