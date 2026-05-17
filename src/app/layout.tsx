@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import { CartProvider } from '@/context/CartContext'
 import CartBar from '@/components/CartBar'
+import ServiceWorkerRegistration from '@/components/ServiceWorkerRegistration'
 
 export const metadata: Metadata = {
   title: '家庭点餐',
@@ -37,6 +38,7 @@ export default function RootLayout({
         <CartProvider>
           {children}
           <CartBar />
+          <ServiceWorkerRegistration />
         </CartProvider>
       </body>
     </html>

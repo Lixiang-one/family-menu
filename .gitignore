@@ -36,9 +36,7 @@ yarn-error.log*
 # vercel
 .vercel
 
-# PWA generated files (built by next-pwa at build time)
-/public/sw.js
-/public/sw.js.map
+# PWA generated build artifacts (not our static sw.js)
 /public/workbox-*.js
 /public/workbox-*.js.map
 /public/swe-worker-*.js
